@@ -1,0 +1,71 @@
+erDiagram
+
+    PERSONA {
+        INT id_persona PK
+        VARCHAR nombre
+        VARCHAR apellido
+        VARCHAR email
+    }
+
+    ORGANIZADOR {
+        INT id_persona PK, FK
+        VARCHAR empresa
+    }
+
+    SPEAKER {
+        INT id_persona PK, FK
+        VARCHAR especialidad
+        TEXT biografia
+    }
+
+    ASISTENTE {
+        INT id_persona PK, FK
+        VARCHAR dni
+    }
+
+    EVENTO {
+        INT id_evento PK
+        VARCHAR nombre
+        DATE fecha
+        VARCHAR lugar
+        INT capacidad
+        INT id_organizador FK
+    }
+
+    SALA {
+        INT id_sala PK
+        VARCHAR nombre
+        INT capacidad
+        INT id_evento FK
+    }
+
+    CHARLA {
+        INT id_charla PK
+        VARCHAR titulo
+        DATETIME horario_inicio
+        DATETIME horario_fin
+        INT id_evento FK
+        INT id_speaker FK
+        INT id_sala FK
+    }
+
+    INSCRIPCION {
+        INT id_inscripcion PK
+        DATE fecha
+        VARCHAR estado
+        INT id_asistente FK
+        INT id_evento FK
+    }
+
+    PERSONA ||--o| ORGANIZADOR : "es"
+    PERSONA ||--o| SPEAKER : "es"
+    PERSONA ||--o| ASISTENTE : "es"
+
+    ORGANIZADOR ||--o{ EVENTO : organiza
+    EVENTO ||--o{ SALA : tiene
+    EVENTO ||--o{ CHARLA : contiene
+    SPEAKER ||--o{ CHARLA : dicta
+    SALA ||--o{ CHARLA : aloja
+
+    ASISTENTE ||--o{ INSCRIPCION : realiza
+    EVENTO ||--o{ INSCRIPCION : recibe

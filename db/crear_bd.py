@@ -1,21 +1,46 @@
-import sqlite3
 from pathlib import Path
+from db.conexion import conectar
+import mysql.connector
+
 
 CARPETA = Path(__file__).resolve().parent
-RUTA_BD = CARPETA / "eventmanager.db"
 RUTA_SQL = CARPETA / "schema.sql"
 
+
 def crear_base_de_datos():
-    with sqlite3.connect(RUTA_BD) as conexion:
-        conexion.execute("PRAGMA foreign_keys = ON")
+    conexion = None
+    cursor = None
+
+    try:
+        conexion = conectar()
+        cursor = conexion.cursor()
 
         with open(RUTA_SQL, "r", encoding="utf-8") as archivo:
             script_sql = archivo.read()
 
-        conexion.executescript(script_sql)
+        # Ejecutar las instrucciones SQL del archivo
+        instrucciones = script_sql.split(";")
 
-    print("Base de datos creada correctamente.")
-    print("Ubicación:", RUTA_BD)
+        for instruccion in instrucciones:
+            instruccion = instruccion.strip()
+
+            if instruccion:
+                cursor.execute(instruccion)
+
+        conexion.commit()
+
+        print("Tablas creadas correctamente en MySQL.")
+
+    except (mysql.connector.Error, OSError) as error:
+        if conexion is not None:
+            conexion.rollback()
+        print("Error al crear las tablas:", error)
+
+    finally:
+        if cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()
 
 
 if __name__ == "__main__":
