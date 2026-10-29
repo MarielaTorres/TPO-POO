@@ -1,4 +1,4 @@
-import objetos.persona as Persona
+from objetos.persona import Persona
 class Speaker(Persona):
     def __init__(self, nombre, apellido, email, especialidad):
         super().__init__(nombre, apellido, email)
