@@ -10,3 +10,4 @@ class Asistente(Persona):
         print("Inscripciones de:", self.nombre)
         for inscripcion in self.inscripciones:
             print("-", inscripcion.evento.nombre)
+

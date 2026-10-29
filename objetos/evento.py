@@ -15,9 +15,15 @@ class Evento:
 
     def agregar_sala(self, sala):
         self.salas.append(sala)
-
+    
     def cupos_disponibles(self):
-        return self.capacidad - len(self.inscripciones)
+        confirmadas = 0
+
+        for inscripcion in self.inscripciones:
+            if inscripcion.estado == "Confirmada":
+                confirmadas += 1
+
+        return self.capacidad - confirmadas
 
     def ver_datos(self):
         print("Evento:", self.nombre)

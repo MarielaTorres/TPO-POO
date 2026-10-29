@@ -5,6 +5,8 @@ from objetos.speaker import Speaker
 from objetos.asistente import Asistente
 from objetos.evento import Evento
 from objetos.charla import Charla
+from objetos.sala import Sala
+from objetos.inscripcion import Inscripcion
 
 
 # Creo un organizador
@@ -68,3 +70,26 @@ evento2.ver_datos()
 
 print("\n--- CHARLA ---")
 charla1.ver_datos()
+
+# Crear una sala
+sala1 = Sala(1, "Auditorio Principal", 100)
+
+# Asociar la sala al evento y a la charla
+evento1.agregar_sala(sala1)
+charla1.asignar_sala(sala1)
+
+# Crear una inscripción
+inscripcion1 = Inscripcion(1, asistente1, evento1)
+
+# Confirmar la inscripción
+inscripcion1.confirmar()
+
+print("\n--- INSCRIPCION ---")
+inscripcion1.ver_datos()
+
+print("\n--- CUPOS ---")
+print("Cupos disponibles:", evento1.cupos_disponibles())
+
+# Ver las inscripciones del asistente
+asistente1.ver_inscripciones()
+

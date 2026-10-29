@@ -7,3 +7,4 @@ class Speaker(Persona):
     def ver_datos(self):
         super().ver_datos()
         print("Especialidad:", self.especialidad)
+
