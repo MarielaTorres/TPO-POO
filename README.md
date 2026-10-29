@@ -67,6 +67,22 @@ Para ejecutar la versión inicial, abrir una terminal en la carpeta principal de
 python main.py
 ```
 
+## Diagrama de clases UML
+
+El siguiente diagrama representa las clases principales
+del sistema EventManager, sus atributos, métodos
+y relaciones.
+
+![Diagrama de clases UML](diagramas/diagrama_clases.png)
+
+### Código fuente del diagrama
+
+El código Mermaid utilizado para generar el diagrama
+se encuentra en:
+
+[Ver código Mermaid](diagramas/diagrama_clases.mmd)
+
+
 ## Autoría
 
 Proyecto académico desarrollado para la materia Programación Orientada a Objetos.
