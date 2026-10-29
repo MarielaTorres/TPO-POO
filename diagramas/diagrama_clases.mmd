@@ -1,0 +1,76 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+direction TB
+
+class Persona {
+  +nombre: str
+  +apellido: str
+  +email: str
+  +ver_datos()
+}
+
+class Organizador {
+  +empresa: str
+  +crear_evento()
+  +ver_eventos()
+}
+
+class Speaker {
+  +especialidad: str
+  +biografia: str
+  +ver_charlas()
+}
+
+class Asistente {
+  +dni: str
+  +ver_inscripciones()
+}
+
+class Evento {
+  +id_evento: int
+  +nombre: str
+  +fecha: date
+  +lugar: str
+  +capacidad: int
+  +agregar_charla()
+  +agregar_sala()
+  +cupos_disponibles()
+}
+
+class Charla {
+  +id_charla: int
+  +titulo: str
+  +horario_inicio: datetime
+  +horario_fin: datetime
+  +asignar_speaker()
+  +asignar_sala()
+}
+
+class Sala {
+  +id_sala: int
+  +nombre: str
+  +capacidad: int
+  +ver_datos()
+}
+
+class Inscripcion {
+  +id_inscripcion: int
+  +fecha: date
+  +estado: str
+  +confirmar()
+  +cancelar()
+}
+
+Persona <|-- Organizador
+Persona <|-- Speaker
+Persona <|-- Asistente
+Organizador "1" --> "0..*" Evento : organiza
+Evento "1" *-- "0..*" Charla : contiene
+Evento "1" *-- "0..*" Sala : dispone de
+Evento "1" --> "0..*" Inscripcion : recibe
+Asistente "1" --> "0..*" Inscripcion : realiza
+Speaker "1" <-- "0..*" Charla : presenta
+Sala "1" <-- "0..*" Charla : aloja

@@ -40,7 +40,7 @@ El diseño inicial contempla las siguientes clases:
 
 - Lenguaje: Python.
 - Paradigma: Programación Orientada a Objetos.
-- Herramienta de modelado: StarUML.
+- Herramienta de modelado: Mermaid.
 - Entorno de desarrollo: Visual Studio Code.
 
 ## Etapas del proyecto
